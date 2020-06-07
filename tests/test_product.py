@@ -1,5 +1,5 @@
 from unittest import TestCase, mock
-from giledRose.product import ProductBase, NormalProduct
+from giledRose.product import ProductBase, NormalProduct, BackstagePass
 from giledRose.exceptions import SellInException, QualityException
 
 
@@ -49,3 +49,42 @@ class TestNormalProduct(TestCase):
         normalProduct = NormalProduct("normal", 10, 10)
         self.assertEqual(normalProduct.calculateQualityAfterOneDay(), 7)
         mock_method.assert_called()
+
+
+class TestBackstagePass(TestCase):
+
+    @mock.patch("giledRose.product.BackstagePass.getDecreaseQualityToday", return_value=1)
+    def test_calculate_quality_after_one_day_should_return_0_when_sell_in_less_than_0(self, mock_method):
+        backstagePass = BackstagePass("pass", 1, 10)
+        backstagePass.sellIn = 0
+
+        self.assertEqual(backstagePass.calculateQualityAfterOneDay(), 0)
+        backstagePass.sellIn = -1
+
+        self.assertEqual(backstagePass.calculateQualityAfterOneDay(), 0)
+        mock_method.assert_not_called()
+
+    @mock.patch("giledRose.product.BackstagePass.getDecreaseQualityToday", return_value=-50)
+    def test_calculate_quality_after_one_day_should_return_50_when_quality_greater_than_50(self, mock_method):
+        backstagePass = BackstagePass("pass", 1, 10)
+        self.assertEqual(backstagePass.calculateQualityAfterOneDay(), 50)
+        mock_method.assert_called()
+
+    @mock.patch("giledRose.product.BackstagePass.getDecreaseQualityToday", return_value=-2)
+    def test_calculate_quality_after_one_day_should_increase_by_getDecreaseQualityToday(self, mock_method):
+        backstagePass = BackstagePass("pass", 1, 10)
+        self.assertEqual(backstagePass.calculateQualityAfterOneDay(), 12)
+        mock_method.assert_called()
+
+    def test_get_decrease_quality_today_should_return_negative_1_when_sellIn_greater_than_10(self):
+        self.assertEqual(BackstagePass("pass", 11, 10).getDecreaseQualityToday(), -1)
+
+    def test_get_decrease_quality_today_should_return_negative_2_when_sellIn_between_5_to_10(self):
+        backstagePass = BackstagePass("pass", 10, 10)
+        self.assertEqual(backstagePass.getDecreaseQualityToday(), -2)
+        backstagePass.sellIn = 6
+        self.assertEqual(backstagePass.getDecreaseQualityToday(), -2)
+
+    def test_get_decrease_quality_today_should_return_negative_3_when_sellIn_between_0_to_5(self):
+        backstagePass = BackstagePass("pass", 5, 10)
+        self.assertEqual(backstagePass.getDecreaseQualityToday(), -3)
