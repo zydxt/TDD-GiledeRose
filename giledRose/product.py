@@ -12,3 +12,11 @@ class ProductBase:
         if not isinstance(quality, int) or not 0 <= quality < 50:
             raise QualityException()
 
+    def updateInfoAfterOneDay(self):
+        self.quality = self.calculateQualityAfterOneDay()
+        self.sellIn -= 1
+
+    def calculateQualityAfterOneDay(self):
+        raise NotImplementedError("Product should implement this method")
+
+
