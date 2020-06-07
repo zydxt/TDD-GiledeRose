@@ -20,3 +20,10 @@ class ProductBase:
         raise NotImplementedError("Product should implement this method")
 
 
+class NormalProduct(ProductBase):
+
+    def calculateQualityAfterOneDay(self):
+        return max(0, self.quality - self.getDecreaseQualityToday())
+
+    def getDecreaseQualityToday(self):
+        return 1 if self.sellIn >= 0 else 2
