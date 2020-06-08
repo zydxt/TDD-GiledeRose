@@ -50,6 +50,13 @@ class TestNormalProduct(TestCase):
         self.assertEqual(normalProduct.calculateQualityAfterOneDay(), 7)
         mock_method.assert_called()
 
+    def test_convert_to_dict_should_return_correct_dict(self):
+        normalDict = NormalProduct("normal", 10, 10).toDict()
+        self.assertEqual(normalDict['name'], "normal")
+        self.assertEqual(normalDict['sellIn'], 10)
+        self.assertEqual(normalDict['quality'], 10)
+        self.assertEqual(normalDict['type'], "normal")
+
 
 class TestBackstagePass(TestCase):
 
@@ -88,3 +95,10 @@ class TestBackstagePass(TestCase):
     def test_get_decrease_quality_today_should_return_negative_3_when_sellIn_between_0_to_5(self):
         backstagePass = BackstagePass("pass", 5, 10)
         self.assertEqual(backstagePass.getDecreaseQualityToday(), -3)
+
+    def test_convert_to_dict_should_return_correct_dict(self):
+        normalDict = BackstagePass("pass", 10, 10).toDict()
+        self.assertEqual(normalDict['name'], "pass")
+        self.assertEqual(normalDict['sellIn'], 10)
+        self.assertEqual(normalDict['quality'], 10)
+        self.assertEqual(normalDict['type'], "backstagePass")

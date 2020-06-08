@@ -22,6 +22,12 @@ class ProductBase:
     def getDecreaseQualityToday(self):
         raise NotImplementedError("Product should implement this method")
 
+    def _getType(self):
+        raise NotImplementedError("Product should implement this method")
+
+    def toDict(self):
+        return {"name": self.name, "sellIn": self.sellIn, "quality": self.quality, "type": self._getType()}
+
 
 class NormalProduct(ProductBase):
 
@@ -30,6 +36,9 @@ class NormalProduct(ProductBase):
 
     def getDecreaseQualityToday(self):
         return 1 if self.sellIn >= 0 else 2
+
+    def _getType(self):
+        return "normal"
 
 
 class BackstagePass(ProductBase):
@@ -47,3 +56,6 @@ class BackstagePass(ProductBase):
             return -2
         elif self.sellIn > 0:
             return -3
+
+    def _getType(self):
+        return "backstagePass"
