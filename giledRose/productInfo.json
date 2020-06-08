@@ -1,9 +1,9 @@
 [
-  {"name": "戒指", "sellIn": 1, "quality": 10, "type": "normal"},
-  {"name": "治疗药水", "sellIn": 1, "quality": 10, "type": "normal"},
-  {"name": "火焰卷轴", "sellIn": 1, "quality": 10, "type": "normal"},
-  {"name": "精钢矿石", "sellIn": 1, "quality": 10, "type": "normal"},
-  {"name": "小丑表演票", "sellIn": 1, "quality": 10, "type": "backstagePass"},
-  {"name": "兽人杂技票", "sellIn": 1, "quality": 10, "type": "backstagePass"},
-  {"name": "血精灵演唱会票", "sellIn": 1, "quality": 10, "type": "backstagePass"}
+  {"name": "戒指", "sellIn": 10, "quality": 10, "type": "normal"},
+  {"name": "治疗药水", "sellIn": 15, "quality": 10, "type": "normal"},
+  {"name": "火焰卷轴", "sellIn": 3, "quality": 10, "type": "normal"},
+  {"name": "精钢矿石", "sellIn": 4, "quality": 10, "type": "normal"},
+  {"name": "小丑表演票", "sellIn": 40, "quality": 10, "type": "backstagePass"},
+  {"name": "兽人杂技票", "sellIn": 5, "quality": 10, "type": "backstagePass"},
+  {"name": "血精灵演唱会票", "sellIn": 7, "quality": 10, "type": "backstagePass"}
 ]
